@@ -1,12 +1,13 @@
-import dotenv from "dotenv"
+import { config } from "dotenv"
 import Koa from "koa"
 import bodyParser from "koa-bodyparser"
 import Router from "koa-router"
+import { resolve } from "path"
 import { handlePing } from "./pingHandler"
 import { displayReport } from "./reportRenderer"
 
-dotenv.config({ path: "../.env" })
-const SERVER_PORT = process.env.SERVER_PORT
+config({ path: resolve(__dirname, "../../.env") })
+const PORT = process.env.PORT
 
 const app = new Koa()
 const router = new Router()
@@ -17,6 +18,5 @@ router.get("/", displayReport)
 app.use(bodyParser())
 app.use(router.routes())
 
-app.listen(SERVER_PORT)
-
-console.log(`Server running on port ${SERVER_PORT}`)
+app.listen(PORT)
+console.log(`Server running on port ${PORT}`)

@@ -2,10 +2,10 @@
 	"name": "is-my-internet-down-server",
 	"version": "1.0.0",
 	"description": "",
-	"main": "dist/index.js",
+	"main": "server/dist/index.js",
 	"scripts": {
-		"watch": "nodemon --watch 'src/**/*' -e ts,tsx --exec ts-node ./src/index.ts",
-		"start": "tsc && node dist/index.js"
+		"watch": "nodemon --watch 'server/src/**/*' -e ts,tsx --exec ts-node ./server/src/index.ts",
+		"start": "tsc && node server/dist/index.js"
 	},
 	"author": "Nico Salvador",
 	"license": "MIT",

@@ -3,9 +3,9 @@
 		"module": "commonjs",
 		"target": "es2017",
 		"noImplicitAny": true,
-		"outDir": "./dist",
+		"outDir": "./server/dist",
 		"sourceMap": true,
 		"esModuleInterop": true
 	},
-	"include": ["./src/**/*"]
+	"include": ["./server/src/**/*"]
 }
