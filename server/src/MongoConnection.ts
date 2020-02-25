@@ -48,7 +48,17 @@ export class MongoConnection {
 		return false
 	}
 
-	pull: () => Mongoose.DocumentQuery<PingData, IPing, {}> = () => {
-		return Ping.findOne().sort("-time")
+	pull: () => Promise<PingData> = () => {
+		return new Promise((resolve, reject) => {
+			Ping.findOne()
+				.sort("-time")
+				.exec((err, ping) => {
+					if (err) {
+						reject(err)
+					} else {
+						resolve(ping)
+					}
+				})
+		})
 	}
 }

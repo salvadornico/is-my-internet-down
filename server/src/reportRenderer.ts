@@ -6,10 +6,8 @@ export const displayReport: (
 ) => void = async ctx => {
 	const db = new MongoConnection()
 
-	await db.pull().exec((err, ping) => {
-		if (err) return console.error(err)
+	const latestPing = await db.pull()
 
-		console.log(ping)
-		ctx.body = JSON.stringify(ping)
-	})
+	// TODO: render template
+	ctx.body = JSON.stringify(latestPing)
 }
