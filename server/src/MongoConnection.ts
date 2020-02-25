@@ -23,13 +23,16 @@ export class MongoConnection {
 	}
 
 	constructor() {
-		Mongoose.connect(this.connectionString, {
-			useNewUrlParser: true,
-			useUnifiedTopology: true
-		})
+		try {
+			Mongoose.connect(this.connectionString, {
+				useNewUrlParser: true,
+				useUnifiedTopology: true
+			})
 
-		this.db = Mongoose.connection
-		this.db.on("error", console.error.bind(console, "connection error:"))
+			this.db = Mongoose.connection
+		} catch (error) {
+			console.error(error)
+		}
 	}
 
 	push: (data: PingData) => boolean = data => {
