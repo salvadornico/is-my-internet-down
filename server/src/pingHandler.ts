@@ -1,6 +1,6 @@
 import Koa from "koa"
-import { PingData } from "../types"
 import { MongoConnection } from "./MongoConnection"
+import { PingData } from "./types"
 
 export const handlePing: (ctx: Koa.ParameterizedContext) => void = ctx => {
 	const requestData = prepareData(ctx.request.body)
