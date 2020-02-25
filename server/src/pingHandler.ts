@@ -6,7 +6,13 @@ export const handlePing: (ctx: Koa.ParameterizedContext) => void = ctx => {
 	const requestData = prepareData(ctx.request.body)
 
 	const db = new MongoConnection()
-	db.push(requestData)
+
+	try {
+		db.push(requestData)
+	} catch (error) {
+		console.error(error)
+		ctx.body = "Something went wrong. Please check Heroku logs."
+	}
 }
 
 const prepareData: (req: { [key: string]: string }) => PingData = ({

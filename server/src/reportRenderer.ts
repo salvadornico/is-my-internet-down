@@ -6,8 +6,12 @@ export const displayReport: (
 ) => void = async ctx => {
 	const db = new MongoConnection()
 
-	const latestPing = await db.pull()
-
-	// TODO: render template
-	ctx.body = JSON.stringify(latestPing)
+	try {
+		const latestPing = await db.pull()
+		// TODO: render template
+		ctx.body = JSON.stringify(latestPing)
+	} catch (error) {
+		console.error(error)
+		ctx.body = "Something went wrong. Please check Heroku logs."
+	}
 }
