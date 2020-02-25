@@ -1,13 +1,23 @@
+#! python3
+# is-my-internet-down client script
+
+import datetime
 import os
+import sys
 
 import requests
 from dotenv import load_dotenv
 
 load_dotenv()
 
-apiUrl = os.getenv('SERVER_URL')
-r = requests.post(url=apiUrl, data={'name': 'Bob'})
+if len(sys.argv) < 2:
+    print('Please provide a client name -- $ check-in.py [name]')
+    sys.exit()
 
-data = r.json()
+data = {
+    'name': sys.argv[1],
+    'time': datetime.datetime.now(),
+    'key': os.getenv('API_KEY')
+}
 
-print(data)
+requests.post(os.getenv('SERVER_URL'), data)
