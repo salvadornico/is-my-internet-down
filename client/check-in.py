@@ -15,7 +15,7 @@ if len(sys.argv) < 2:
     print('Please provide a client name -- $ check-in.py [name]')
     sys.exit()
 
-time = datetime.datetime.now()
+time = datetime.datetime.utcnow()
 data = {'name': sys.argv[1], 'time': time, 'key': os.getenv('API_KEY')}
 
 try:
