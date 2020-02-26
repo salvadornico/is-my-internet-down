@@ -6,7 +6,7 @@ import { resolve } from "path"
 import { handlePing } from "./pingHandler"
 import { displayReport, fetchLastPing } from "./reportRenderer"
 
-config({ path: resolve(__dirname, "../../.env") })
+config({ path: resolve(__dirname, "../.env") })
 const PORT = process.env.PORT
 
 const app = new Koa()
