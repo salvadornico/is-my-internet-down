@@ -7,9 +7,9 @@ import sys
 from os.path import dirname, join
 
 import requests
-from dotenv import Dotenv
+from dotenv import load_dotenv
 
-Dotenv(join(dirname(__file__), '../.env'))
+load_dotenv(join(dirname(__file__), '../.env'))
 
 if len(sys.argv) < 2:
     print('Please provide a client name -- $ check-in.py [name]')
