@@ -8,10 +8,11 @@ export const handlePing: (ctx: Koa.ParameterizedContext) => void = ctx => {
 	const db = new MongoConnection()
 
 	try {
-		db.push(requestData)
+		const success = db.push(requestData)
+		ctx.body = JSON.stringify({ success })
 	} catch (error) {
 		console.error(error)
-		ctx.body = "Something went wrong. Please check Heroku logs."
+		ctx.body = JSON.stringify({ success: false })
 	}
 }
 

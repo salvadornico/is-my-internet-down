@@ -40,7 +40,10 @@ export class MongoConnection {
 			const newPing = new Ping(data)
 
 			await newPing.save((err, newPing) => {
-				if (err) return console.error(err)
+				if (err) {
+					console.error(err)
+					return false
+				}
 
 				console.log(`Ping received at ${data.time}`)
 
