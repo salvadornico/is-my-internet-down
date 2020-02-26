@@ -2,6 +2,7 @@ import { config } from "dotenv"
 import Koa from "koa"
 import bodyParser from "koa-bodyparser"
 import Router from "koa-router"
+import serve from "koa-static"
 import { resolve } from "path"
 import { handlePing } from "./pingHandler"
 import { displayReport, fetchLastPing } from "./reportRenderer"
@@ -17,6 +18,7 @@ router.get("/latest-ping", fetchLastPing)
 router.post("/check-in", handlePing)
 
 app.use(bodyParser())
+app.use(serve(__dirname + "/page/public"))
 app.use(router.routes())
 
 app.listen(PORT)
