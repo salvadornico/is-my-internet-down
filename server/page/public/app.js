@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	fetch("/latest-ping")
 		.then(res => res.json())
 		.then(({ name, time }) => {
-			const timeObject = moment(time).add(8, "hours") // Compensate for UTC records
+			const timeObject = moment(time)
 			//- const minutesSincePing = 5 // ?
 			//- const answer = doubtLevels.filter(level => level.minutesAllowance > minutesSincePing) // Then choose lowest remaining
 
