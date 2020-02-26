@@ -5,8 +5,8 @@
 	"main": "server/dist/index.js",
 	"scripts": {
 		"watch": "nodemon --watch 'server/src/**/*' -e ts,tsx --exec ts-node ./server/src/index.ts",
-		"build": "tsc",
-		"start": "npm run build && node server/dist/index.js",
+		"build": "tsc && cp -r server/src/page server/dist",
+		"start": "ts-node ./server/src/index.ts",
 		"postinstall": "npm run build"
 	},
 	"author": "Nico Salvador",
