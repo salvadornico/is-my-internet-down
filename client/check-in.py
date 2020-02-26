@@ -7,21 +7,16 @@ import sys
 from os.path import dirname, join
 
 import requests
+from dotenv import Dotenv
 
-from dotenv import load_dotenv
-
-load_dotenv(join(dirname(__file__), '../.env'))
+Dotenv(join(dirname(__file__), '../.env'))
 
 if len(sys.argv) < 2:
     print('Please provide a client name -- $ check-in.py [name]')
     sys.exit()
 
 time = datetime.datetime.now()
-data = {
-    'name': sys.argv[1],
-    'time': time,
-    'key': os.getenv('API_KEY')
-}
+data = {'name': sys.argv[1], 'time': time, 'key': os.getenv('API_KEY')}
 
 try:
     requests.post(os.getenv('SERVER_URL'), data)
