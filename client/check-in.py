@@ -7,6 +7,7 @@ import sys
 from os.path import dirname, join
 
 import requests
+
 from dotenv import load_dotenv
 
 load_dotenv(join(dirname(__file__), '../.env'))
@@ -15,10 +16,18 @@ if len(sys.argv) < 2:
     print('Please provide a client name -- $ check-in.py [name]')
     sys.exit()
 
+time = datetime.datetime.now()
 data = {
     'name': sys.argv[1],
-    'time': datetime.datetime.now(),
+    'time': time,
     'key': os.getenv('API_KEY')
 }
 
-requests.post(os.getenv('SERVER_URL'), data)
+try:
+    requests.post(os.getenv('SERVER_URL'), data)
+except:
+    message = f"Ping failed at {time}"
+    print(message)
+    f = open("errors.log", "a")
+    f.write(message)
+    f.close()

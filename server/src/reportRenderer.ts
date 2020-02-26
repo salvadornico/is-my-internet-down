@@ -1,17 +1,19 @@
 import Koa from "koa"
+import { resolve } from "path"
+import pug from "pug"
 import { MongoConnection } from "./MongoConnection"
 
 export const displayReport: (
 	req: Koa.ParameterizedContext
 ) => void = async ctx => {
-	const db = new MongoConnection()
+	ctx.body = pug.renderFile(resolve(__dirname, "page/index.pug"))
+}
 
-	try {
-		const latestPing = await db.pull()
-		// TODO: render template
-		ctx.body = JSON.stringify(latestPing)
-	} catch (error) {
-		console.error(error)
-		ctx.body = "Something went wrong. Please check Heroku logs."
-	}
+export const fetchLastPing: (
+	req: Koa.ParameterizedContext
+) => void = async ctx => {
+	const db = new MongoConnection()
+	const latestPing = await db.pull()
+
+	ctx.body = JSON.stringify(latestPing)
 }
