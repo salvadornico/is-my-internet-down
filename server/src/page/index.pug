@@ -1,0 +1,15 @@
+h1 Is My Internet Down?
+
+p Hello 👋
+p#report Fetching last ping..
+
+script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js")
+script(type="text/javascript").
+    document.addEventListener("DOMContentLoaded", () => {
+        const reportLine = document.querySelector("#report")
+
+        fetch("/latest-ping").then(res => res.json()).then(({ name, time }) => {
+            const timeObject = moment(time)
+            reportLine.textContent = `Last ping received from ${name} ${timeObject.fromNow()} (${timeObject.format('D MMM YYYY [at] H:mm:ss')})`
+        })
+    })

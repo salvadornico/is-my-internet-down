@@ -4,7 +4,7 @@ import bodyParser from "koa-bodyparser"
 import Router from "koa-router"
 import { resolve } from "path"
 import { handlePing } from "./pingHandler"
-import { displayReport } from "./reportRenderer"
+import { displayReport, fetchLastPing } from "./reportRenderer"
 
 config({ path: resolve(__dirname, "../../.env") })
 const PORT = process.env.PORT
@@ -12,8 +12,9 @@ const PORT = process.env.PORT
 const app = new Koa()
 const router = new Router()
 
-router.post("/check-in", handlePing)
 router.get("/", displayReport)
+router.get("/latest-ping", fetchLastPing)
+router.post("/check-in", handlePing)
 
 app.use(bodyParser())
 app.use(router.routes())
