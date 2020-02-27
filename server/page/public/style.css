@@ -1,3 +1,25 @@
+:root {
+  --answer-color: #ffffff;
+}
+
+body {
+    display: grid;
+    place-items: center;
+    font-family: "Roboto Mono";
+}
+
+#main-container {
+    text-align: center;
+}
+
+.answer {
+    background-color: var(--answer-color);
+}
+
+.report p:nth-child(2) {
+    font-size: small;
+}
+
 .hidden {
     display: none;
 }

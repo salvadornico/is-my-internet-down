@@ -1,13 +1,15 @@
+link(href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet")
 link(rel="stylesheet", href="style.css")
 
-p Hello 👋
+#main-container
+    p Hello 👋
 
-h1 Is My Internet Down?
-h2.answer.hidden
+    h1 Is My Internet Down?
+    h2.answer.hidden
 
-#report-container
-    p.loading-message Fetching last ping..
-    .report.hidden
+    #report-container
+        p.loading-message Fetching last ping..
+        .report.hidden
 
 script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js")
 script(src="app.js")

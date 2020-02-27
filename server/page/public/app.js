@@ -1,8 +1,8 @@
 const doubtLevels = [
-	{ minutesAllowance: 5, message: "No", color: "" },
-	{ minutesAllowance: 10, message: "Maybe", color: "" },
-	{ minutesAllowance: 20, message: "Probably", color: "" },
-	{ minutesAllowance: 30, message: "Almost definitely", color: "" }
+	{ minutesAllowance: 5, message: "No", color: "4CAF50" },
+	{ minutesAllowance: 10, message: "Maybe", color: "FFEB3B" },
+	{ minutesAllowance: 20, message: "Probably", color: "FF9800" },
+	{ minutesAllowance: 30, message: "Almost definitely", color: "f44336" }
 ]
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -13,13 +13,11 @@ document.addEventListener("DOMContentLoaded", () => {
 			const answerLine = document.querySelector(".answer")
 
 			const timeObject = moment(time)
-			const secondsSincePing = moment().diff(timeObject, "seconds");
+			const secondsSincePing = moment().diff(timeObject, "seconds")
 
 			const answer = doubtLevels
 				.filter(level => (level.minutesAllowance * 60) > secondsSincePing)
 				.reduce((res, obj) => (obj.minutesAllowance < res.minutesAllowance) ? obj : res)
-			;
-			// Change CSS variable for background color
 
 			answerLine.textContent = answer.message
 			report.innerHTML = `
@@ -30,5 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
 			document.querySelector(".loading-message").classList.add("hidden")
 			answerLine.classList.remove("hidden")
 			report.classList.remove("hidden")
+			document.documentElement.style.setProperty("--answer-color", "#" + answer.color);
 		})
 })
