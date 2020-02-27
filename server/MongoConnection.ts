@@ -17,9 +17,7 @@ export class MongoConnection {
 	db: Mongoose.Connection
 
 	get connectionString(): string {
-		const PASSWORD = process.env.DB_PASS
-
-		return `mongodb+srv://nico:${PASSWORD}@is-my-internet-down-mpr2n.gcp.mongodb.net/pings?retryWrites=true&w=majority`
+		return process.env.DB_URL
 	}
 
 	constructor() {
