@@ -5,7 +5,7 @@ A script and remote server used to report on whether your home network connectio
 Comprised of two parts:
 
 -   Client Python script meant to be run regularly as a cron job on your home network
--   Remote server that will display when the last successfull ping from the client was received
+-   Remote Node server that will display when the last successfull ping from the client was received
 
 Setup:
 
@@ -14,4 +14,8 @@ Setup:
 
     python3 -m pip install -r client/requirements.txt
     cd server
+    npm install
     npm run start
+
+    // Add to crontab:
+    */10 * * * * python3 client/check-in.py [Name of device]
