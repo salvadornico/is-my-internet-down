@@ -14,13 +14,19 @@ const checkDelay = async () => {
     const minutesSincePing = moment().diff(timeObject, "minutes")
 
     if (minutesSincePing < 30) {
-        return
+        process.exit(0)
     }
 
     fetch("https://maker.ifttt.com/trigger/check_internet/with/key/pdO7pieMLX-gEqse6DdrKnV6HypeSZyzORO5dt6HmCb")
         .then(res => res.text())
-        .then(data => console.log(data))
-        .catch(err => console.error(err))
+        .then(data => {
+            console.log(data)
+            process.exit(0)
+        })
+        .catch(err => {
+            console.error(err)
+            process.exit(1)
+        })
 }
 
 checkDelay()
