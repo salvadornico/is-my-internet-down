@@ -15,11 +15,14 @@ document.addEventListener("DOMContentLoaded", () => {
 			const timeObject = moment(time)
 			const secondsSincePing = moment().diff(timeObject, "seconds")
 
-			const answer = doubtLevels
+			const possibleAnswers = doubtLevels
 				.filter(level => (level.minutesAllowance * 60) > secondsSincePing)
-				.reduce((res, obj) => (obj.minutesAllowance < res.minutesAllowance) ? obj : res)
 
-			answerLine.textContent = answer.message
+			const finalAnswer = possibleAnswers.length === 0
+				? doubtLevels[doubtLevels.length - 1]
+				: possibleAnswers.reduce((res, obj) => (obj.minutesAllowance < res.minutesAllowance) ? obj : res)
+
+			answerLine.textContent = finalAnswer.message
 			report.innerHTML = `
 				<p>Last ping received from ${name} ${timeObject.fromNow()}</p>
 				<p>${timeObject.format("D MMM YYYY [at] HH:mm:ss")} Philippine Standard Time</p>
@@ -28,6 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
 			document.querySelector(".loading-message").classList.add("hidden")
 			answerLine.classList.remove("hidden")
 			report.classList.remove("hidden")
-			document.documentElement.style.setProperty("--answer-color", "#" + answer.color);
+			document.documentElement.style.setProperty("--answer-color", "#" + finalAnswer.color);
 		})
 })
