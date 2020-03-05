@@ -1,5 +1,5 @@
 import Koa from "koa"
-import { MongoConnection } from "./MongoConnection"
+import { MongoConnection } from "./db/MongoConnection"
 import { PingData } from "./types"
 
 export const handlePing: (ctx: Koa.ParameterizedContext) => void = ctx => {
@@ -8,7 +8,7 @@ export const handlePing: (ctx: Koa.ParameterizedContext) => void = ctx => {
 	const db = new MongoConnection()
 
 	try {
-		const success = db.push(requestData)
+		const success = db.checkIn(requestData)
 		ctx.body = JSON.stringify({ success })
 	} catch (error) {
 		console.error(error)

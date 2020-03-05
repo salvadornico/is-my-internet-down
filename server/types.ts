@@ -3,3 +3,7 @@ export type PingData = {
 	time: Date
 	key?: string
 }
+
+export type NotificationData = {
+	time: Date
+}

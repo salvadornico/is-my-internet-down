@@ -10,7 +10,7 @@
 	"include": [
 		"./server/src/**/*",
 		"server/index.ts",
-		"server/MongoConnection.ts",
+		"server/db/MongoConnection.ts",
 		"server/pingHandler.ts",
 		"server/reportRenderer.ts",
 		"server/types.ts"
