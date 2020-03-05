@@ -14,12 +14,10 @@ const PingSchema = new Mongoose.Schema<PingData>({
 export const Ping = Mongoose.model<IPing>("Ping", PingSchema)
 
 interface INotification extends Mongoose.Document {
-	name: string
 	time: Date
 }
 
 const NotificationSchema = new Mongoose.Schema<NotificationData>({
-	name: String,
 	time: Date
 })
 
