@@ -1,6 +1,4 @@
 import { config } from "dotenv"
-// import moment from "moment"
-import fetch from "node-fetch"
 import { resolve } from "path"
 import { MongoConnection } from "./db/MongoConnection"
 
@@ -13,6 +11,9 @@ const checkDelay = async () => {
 	config({ path: resolve(__dirname, "../.env") })
 
 	const db = new MongoConnection()
+	const latestNotif = await db.getLastNotification()
+	console.log(latestNotif)
+	process.exit(0)
 	// const { time } = await db.getLastCheckIn()
 
 	// const timeObject = moment(time)
@@ -22,19 +23,20 @@ const checkDelay = async () => {
 	// 	process.exit(0)
 	// }
 
-	fetch(process.env.IFTTT_URL)
-		.then(res => res.text())
-		.then(data => {
-			console.log(data)
+	// fetch(process.env.IFTTT_URL)
+	// 	.then(res => res.text())
+	// 	.then(data => {
+	// 		console.log(data)
 
-			try {
-				db.recordNotification({ time: new Date() })
-				process.exit(0)
-			} catch (error) {
-				handleError(error)
-			}
-		})
-		.catch(err => handleError(err))
+	// 		try {
+	// 			console.log("trying")
+	// 			db.recordNotification({ time: new Date() })
+	// 			process.exit(0)
+	// 		} catch (error) {
+	// 			handleError(error)
+	// 		}
+	// 	})
+	// 	.catch(err => handleError(err))
 }
 
 checkDelay()
