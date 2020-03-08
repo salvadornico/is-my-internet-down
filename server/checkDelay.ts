@@ -22,9 +22,7 @@ const checkDelay = async () => {
 	// 	process.exit(0)
 	// }
 
-	fetch(
-		"https://maker.ifttt.com/trigger/check_internet/with/key/pdO7pieMLX-gEqse6DdrKnV6HypeSZyzORO5dt6HmCb"
-	)
+	fetch(process.env.IFTTT_URL)
 		.then(res => res.text())
 		.then(data => {
 			console.log(data)
