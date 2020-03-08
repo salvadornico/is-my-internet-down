@@ -13,7 +13,6 @@ Setup:
     // Then fill out necessary details & credentials
 
     python3 -m pip install -r client/requirements.txt
-    cd server
     npm install
     npm run start
 
