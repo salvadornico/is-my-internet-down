@@ -4,6 +4,11 @@ import fetch from "node-fetch"
 import { resolve } from "path"
 import { MongoConnection } from "./db/MongoConnection"
 
+const handleError = (error: any) => {
+	console.error(error)
+	process.exit(1)
+}
+
 const checkDelay = async () => {
 	config({ path: resolve(__dirname, "../.env") })
 
@@ -24,14 +29,14 @@ const checkDelay = async () => {
 		.then(data => {
 			console.log(data)
 
-			db.recordNotification({ time: new Date() })
-
-			process.exit(0)
+			try {
+				db.recordNotification({ time: new Date() })
+				process.exit(0)
+			} catch (error) {
+				handleError(error)
+			}
 		})
-		.catch(err => {
-			console.error(err)
-			process.exit(1)
-		})
+		.catch(err => handleError(err))
 }
 
 checkDelay()
